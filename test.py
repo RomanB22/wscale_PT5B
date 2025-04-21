@@ -1,5 +1,4 @@
-from netpyne.batchtools import specs, comm
-from netpyne import sim
+from netpyne import specs, sim
 import json, pickle
 from cfg import cfg
 
@@ -73,28 +72,7 @@ cfg, netParams = init_test(cfg, cell_params, exp2syn)
 sim.createSimulateAnalyze(netParams=netParams, simConfig=cfg)
 
 data = {'epsp': float(get_epsp(sim)), 'sec': cfg.sec_loc[0], 'loc': cfg.sec_loc[1], 'weight': cfg.weight}
-print(data)
-comm.initialize()
-comm.send(json.dumps(data))
-comm.close()
-
-
-
-"""
-#------------------------------------------------------------------------------
-# Synaptic mechanism parameters
-#------------------------------------------------------------------------------
-netParams.synMechParams['NMDA'] = {'mod': 'MyExp2SynNMDABB', 'tau1NMDA': 15, 'tau2NMDA': 150, 'e': 0}
-netParams.synMechParams['AMPA'] = {'mod':'MyExp2SynBB', 'tau1': 0.05, 'tau2': 5.3*cfg.AMPATau2Factor, 'e': 0}
-netParams.synMechParams['GABAB'] = {'mod':'MyExp2SynBB', 'tau1': 3.5, 'tau2': 260.9, 'e': -93}
-netParams.synMechParams['GABAA'] = {'mod':'MyExp2SynBB', 'tau1': 0.07, 'tau2': 18.2, 'e': -80}
-netParams.synMechParams['GABAASlow'] = {'mod': 'MyExp2SynBB','tau1': 2, 'tau2': 100, 'e': -80}
-netParams.synMechParams['GABAASlowSlow'] = {'mod': 'MyExp2SynBB', 'tau1': 200, 'tau2': 400, 'e': -80}
-
-
-
-    initCfg[('NetStim1', 'synMech')] = ['AMPA','NMDA']
-
-
-
-"""
+#print(data)
+out_json = json.dumps(data)
+print(out_json)
+sim.send(out_json)

@@ -1,6 +1,5 @@
 from netpyne.batchtools.search import search
-import pandas as pd
-import os
+import numpy as np
 import json
 
 sections = list(json.load(open('Na12HH16HH_TF.json', 'r'))['secs'].keys())
