@@ -4,7 +4,7 @@ import json
 
 sections = list(json.load(open('Na12HH16HH_TF_May29th2025_NoWeightNorm.json', 'r'))['secs'].keys())
 
-weights = [0.1] #list(np.arange(0.01, 0.2, 0.01)/100.0) ∂
+weights = list(np.arange(0.01, 0.2, 0.01)/100.0)
 # Create parameter grid for search
 params = {
     'sec'   : sections,
