@@ -4,6 +4,9 @@ import json
 
 sections = list(json.load(open('Na12HH16HH_TF_May29th2025_NoWeightNorm.json', 'r'))['secs'].keys())
 
+sections.remove('axon_0')
+sections.remove('axon_1')
+
 weights = list(np.arange(0.01, 0.2, 0.01)/100.0)
 # Create parameter grid for search
 params = {
